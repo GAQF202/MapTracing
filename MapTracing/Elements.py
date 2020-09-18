@@ -6,3 +6,5 @@ class Rute(object):
         self.inicio = ""
         self.fin = ""
 
+    def get(self):
+        return self.nombre, self.inicio, self.fin, self.peso

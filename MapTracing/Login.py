@@ -1,25 +1,53 @@
 import re
 from Elements import *
-
+from Stack import *
 
 class multifunctions:
     def read_path(self,input):
+        pila = Stack()
         file = open(input, "r" , encoding="utf8")
+        lmpiador = ""
 
+        probando = []
         
-        patunic = r"[\s*<nombre>\n*\s*[A-Z]*[a-z]*\s*[A-Z]*\s*[a-z]*\s*[0-9]*\n*\s*</nombre>]*"
-        cont = file.read()
+        patname = r"[\s*<nombre>\n*\s*[A-Z]*[a-z]*\s*[A-Z]*\s*[a-z]*\s*[0-9]*\n*\s*</nombre>]*"
 
-        #for i in file:
-          #if (re.match(patunic, i)):
-            #print(i)
+        patruteopen = r"\s*<ruta>"
+        patruteclose = r"\s*</ruta>"    
 
-        fa = re.findall(patunic,cont)
+        patnameclose = r"\s*</nombre>"
+        patstartclose = r"\s*</inicio>"
+        patendclose = r"\s*</fin>"
+        patweight = r"[\s*<peso>\s*[0-9]*.[0-9]*\s*</peso>]*"
 
-        print(fa)
+        for i in file:
+            
+            if re.match(patruteopen,i):
+                ruta = Rute()
+            
+            if (re.match(patnameclose,i)):
+                ruta.nombre = str(pila.pop()).strip()
 
-    
+            if (re.match(patstartclose,i)):
+                ruta.inicio = str(pila.pop()).strip()    
+                
+            if (re.match(patendclose,i)):
+                ruta.fin = str(pila.pop()).strip()   
 
+            if (re.match(patweight,i)):
+                ruta.peso = str(i).strip()
+
+            if(re.match(patruteclose, i)):
+                probando.append(ruta)
+                while(pila.get_Size()!=0):
+                    pila.pop()
+
+            pila.push(i)
+
+            #if (re.match(patunic0,i) and not(re.match(patunic,i))):
+                #print(i)   
+        for i in probando:
+          print(i.get())
 
 
 #FUNCION DE MENU
