@@ -28,6 +28,9 @@
     <Compile Include="Elements.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="reportes.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Stack.py">
       <SubType>Code</SubType>
     </Compile>

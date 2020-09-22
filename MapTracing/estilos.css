@@ -1,0 +1,49 @@
+body{
+  background-color: #C1D2DB;
+  font-family: Arial;
+}
+
+#tabla1{
+   margin: 30px auto;
+   width: 600px;
+}
+
+#tabla2{
+   margin: 30px auto;
+   width: 600px;
+}
+
+table{
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+	border: none;
+}
+
+
+th, td{
+	padding: 5px;
+	border: none;
+}
+
+thead{
+	background-color: #1DF870;
+	border-bottom: 5px solid #28B463;
+	color:white;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover td{
+	background-color: #5DADE2;
+	color: white;
+}
+
+h1{
+	font-weiht: normal;
+	text-align: center;
+	background: #73C6B6 ;
+}

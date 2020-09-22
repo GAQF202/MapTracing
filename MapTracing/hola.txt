@@ -1,14 +1,14 @@
 <ruta>
-    <nombre>
+    <nombre>**
         ruta_central
     </nombre>
-    <peso>2.5</peso>
+    <peso>2.5</peso>a
     <inicio>
-        estacioNzona1
+        estacioNzona1	
     </inicio>
     <fin>
         estacionZonA6
-    </fin>
+    </fin>%
 </ruta>
 
 <estacIon>
@@ -49,7 +49,7 @@
     <nombre>EstacionZona5</nombre>
 </estacion>
 
-<ruta>
+<Ruta>
     <nombre>
         ruta2
     </nombre>
@@ -113,11 +113,8 @@
     </fin>
 </ruta>
 
-
-
-
 <ruta>
-    <nombre>
+    <nombre>""
         ruta_2_5
     </nombre>
     <peso>3</peso>
@@ -136,7 +133,3 @@
 </estacion>@
 		
 <nombre>Mapa Central</nombre>
-
-<nombre>
-hola
-</nombre>
