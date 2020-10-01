@@ -2,7 +2,7 @@
     <nombre>**
         ruta_central
     </nombre>
-    <peso>2.5</peso>a
+    <peso>2.5</peso>
     <inicio>
         estacioNzona1	
     </inicio>
@@ -62,7 +62,7 @@
     </fin>
 </ruta>
 <ruta>
-    <nombre>
+    <nombre>********
         rutaExpress
     </nombre>
     <peso>0.7</peso>
@@ -131,5 +131,6 @@
     <nombre>estacionzona4</nombre>
     <estado>cerrada</estado>
 </estacion>@
+
 		
 <nombre>Mapa Central</nombre>

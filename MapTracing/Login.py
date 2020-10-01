@@ -5,6 +5,7 @@ from MapTracing import *
 import os
 from tabulate import tabulate
 from reportes import *
+from graficador import *
 
 
 probando = []  
@@ -13,15 +14,18 @@ errores = []
 lexemas = []
 lexema_temporal = []
 lexema_position = []
+intersecciones = []
+ultima = Rute()
+estacion_final = ""
+
 
 def save_lexema(lex,pos):
 
-    for d in lex:
+    while len(lex)!=2:
         lexemas.append(str(lex.pop(0)))
         lexemas.append(str(pos.pop(0)))
         lexemas.append(str(pos.pop(0)))
         lexemas.append(str(lex.pop(0)))
-
 
 def save_mistakes(row,colum,token):
     error_temporal=[]
@@ -203,6 +207,8 @@ class multifunctions:
         file = open("gege.txt","r")
         lines = file.readlines()
         padre =""
+        edge = []
+        i = -1
         for row in lines:
             if row == "\n":
                 continue
@@ -213,6 +219,10 @@ class multifunctions:
             elif re.match(patestationopen,row):
                 estacion = Estation()
                 padre = "estacion"
+
+            if (re.match(patnameclose,row)) and padre != "ruta" and padre!="estacion":
+                lexema_temporal.append(ruta.nombre)
+                lexema_temporal.append("nombre")
 
             if (re.match(patnameclose,row)) and padre == "ruta":
                 ruta.nombre = str(pila.pop()).strip()
@@ -237,6 +247,8 @@ class multifunctions:
             if(re.match(patruteclose, row))and padre == "ruta":
                 probando.append(ruta)
                 padre=""
+                intersecciones.append(edge)
+                edge = []
                 while(pila.get_Size()!=0):
                     pila.pop()
 
@@ -257,7 +269,9 @@ class multifunctions:
                 lexema_temporal.append("color")
 
             if(re.match(patestationclose, row))and padre == "estacion":
-                probando.append(estacion)
+                i+=1
+                estacion.posicion = i
+                estaciones.append(estacion)
                 padre=""
                 while(pila.get_Size()!=0):
                     pila.pop()
@@ -267,18 +281,32 @@ class multifunctions:
 
         #for b in probando:
           #print(b.get())
-        
+
+        #for b in estaciones:
+          #print(b.get())
+
         save_lexema(lexema_temporal,lexema_position)
         reportar = Report()
         reportar.tabulador(errores,lexemas)
         inicio.regresar()
-        
+
+
+def limpiador():
+    while len(probando) !=0:
+        probando.pop()
+    while len(estaciones) !=0:
+        estaciones.pop()
+
+def dame_ultimo(ultimo):
+    if estaciones[ultimo].estado.lower() == "cerrada":
+        return dame_ultimo(ultimo-1)
+    else:
+        return estaciones[ultimo].nombre.lower()
 
 #FUNCION DE MENU
 class login:
 
     not_file = False
-
     def take_name(self):
 
         print("1. Cargar Archivo")
@@ -288,28 +316,36 @@ class login:
 
         option = int(input())
         rute_list = []
-   
+        ruta_inicio = ""
+        ruta_fin= ""
+        rutas_cortas = []
         if option == 1:
+            limpiador()
             print("Ingrese la ruta del archivo")
             path = str(input())
             lector.analyzer(path)     
             
         elif option == 2:
-            if len(probando)==0:
+            if len(probando)==0 or len(estaciones)==0:
                 print("----Debe ingresar primero un archivo válido----")
                 inicio.take_name()
             else:
                 print("Ingrese su estacion inicial")
-
+                ruta_inicio = str(input())
+                print("Ingrese su estacion final")
+                ruta_fin = str(input())
+                rutas_cortas = short_rute(probando,estaciones,ruta_inicio,ruta_fin)
 
         elif option == 3:
-            print("Graficando Mapa...")
-            rios1 = [['Almanzora', 105],
-            ['Guadiaro', 79],
-            ['Guadalhorce', 154],
-            ['Guadalmedina', 51.5]]
-        
-            print(tabulate(rios1))
+            if len(probando)==0 or len(estaciones)==0:
+                print("----Debe ingresar primero un archivo válido----")
+                inicio.take_name()
+            else:
+                print("Graficando Mapa...")
+                ruta_fin = dame_ultimo((len(estaciones)-1)-1)
+                short_rute(probando,estaciones,estaciones[0].nombre,ruta_fin)
+                graficos(probando,estaciones)
+
             
         elif option == 4:
             print("Gracias por utilizar MapTracing :)")

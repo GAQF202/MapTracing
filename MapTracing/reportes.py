@@ -61,10 +61,14 @@ class Report(object):
 
         f.write(mensaje)
         f.close()
-
         webbrowser.open_new_tab('reportes.html')
         tabla=""
         tabla2=""
+        mensaje=""
         print("Reporte de errores generado")
 
+        while len(list_on_list) !=0:
+            list_on_list.pop()
+        while len(lexemas_position) !=0:
+            lexemas_position.pop()
        

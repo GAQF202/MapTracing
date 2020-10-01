@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="graficador.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Login.py">
       <SubType>Code</SubType>
     </Compile>
