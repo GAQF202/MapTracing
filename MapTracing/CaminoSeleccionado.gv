@@ -1,0 +1,22 @@
+digraph finite_state_machine {
+	rankdir=LR size="8,5"
+	node [color="#dae8fc" shape=ellipse style=filled]
+	"agua
+disponible"
+	node [color="#f5f5f5" shape=ellipse style=filled]
+	"fuego
+disponible"
+	node [color="#dae8fc" shape=ellipse style=filled]
+	"hierba
+disponible"
+	edge [color="#FF6347" penwidth=3]
+	"fuego
+disponible" -> "hierba
+disponible" [label="rutaX1
+1.0"]
+	edge [color="#FF6347" penwidth=3]
+	"agua
+disponible" -> "fuego
+disponible" [label="rutaY2
+2"]
+}

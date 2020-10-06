@@ -33,6 +33,7 @@ class Report(object):
           <th><strong>Fila</strong></th>
           <th><strong>Columna</strong></th>
           <th><strong>Carácter</strong></th>
+          <th><strong>Descripción</strong></th>
         </tr></thead>
         """
         index = 0

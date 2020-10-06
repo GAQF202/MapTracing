@@ -1,37 +1,48 @@
 digraph finite_state_machine {
 	rankdir=LR size="8,5"
-	node [color="#1A5AAF" shape=ellipse style=filled]
-	estacionzona6
-	node [color="#AF5B1A" shape=ellipse style=filled]
-	estacionzona2
-	node [color="#E52E22" shape=ellipse style=filled]
-	estacionzona1
-	node [color="#208E40" shape=ellipse style=filled]
-	estacionzona5
-	node [color="#AF5B1A" shape=ellipse style=filled]
-	estacionzona4
+	label="\n\nCiudad_Guatemala
+"
+	fontsize=20
+	node [color="#dae8fc" shape=ellipse style=filled]
+	"estnorte
+disponible"
+	node [color="#f5f5f5" shape=ellipse style=filled]
+	"estoeste
+disponible"
+	node [color="#dae8fc" shape=ellipse style=filled]
+	"est_este
+disponible"
+	node [color="#d5e8d4" shape=ellipse style=filled]
+	"sur
+disponible"
 	edge [color=black penwidth=""]
-	estacionzona1 -> estacionzona6 [label="ruta_central
+	"est_este
+disponible" -> "estoeste
+disponible" [label="ruta_central1
 2.5"]
-	edge [color="#FF6347" penwidth=3]
-	estacionzona6 -> estacionzona2 [label="ruta_central2
-4"]
 	edge [color=black penwidth=""]
-	estacionzona6 -> estacionzona1 [label="ruta2
+	"estoeste
+disponible" -> "est_este
+disponible" [label="ruta_central2
+1.5"]
+	edge [color=black penwidth=""]
+	"estnorte
+disponible" -> "estoeste
+disponible" [label="rutaNO
+8"]
+	edge [color="#FF6347" penwidth=3]
+	"estnorte
+disponible" -> "est_este
+disponible" [label="RUTA_NE
+5.00001"]
+	edge [color=black penwidth=""]
+	"estoeste
+disponible" -> "sur
+disponible" [label="ruta_OS
+2.4"]
+	edge [color=black penwidth=""]
+	"est_este
+disponible" -> "sur
+disponible" [label="ruta_ES
 5"]
-	edge [color="#FF6347" penwidth=3]
-	estacionzona2 -> estacionzona1 [label="rutaExpress
-0.7"]
-	edge [color="#FF6347" penwidth=3]
-	estacionzona1 -> estacionzona5 [label="rutaJardines
-2"]
-	edge [color=black penwidth=""]
-	estacionzona6 -> estacionzona4 [label="ruta4
-1.2"]
-	edge [color=black penwidth=""]
-	estacionzona4 -> estacionzona5 [label="ruta_4_5
-2"]
-	edge [color=black penwidth=""]
-	estacionzona2 -> estacionzona5 [label="ruta_2_5
-3"]
 }

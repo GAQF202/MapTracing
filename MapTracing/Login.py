@@ -17,22 +17,23 @@ lexema_position = []
 intersecciones = []
 ultima = Rute()
 estacion_final = ""
-
+mapa = Map()
 
 def save_lexema(lex,pos):
 
-    while len(lex)!=2:
+    while len(lex)!=0:
         lexemas.append(str(lex.pop(0)))
         lexemas.append(str(pos.pop(0)))
         lexemas.append(str(pos.pop(0)))
         lexemas.append(str(lex.pop(0)))
 
-def save_mistakes(row,colum,token):
+def save_mistakes(row,colum,token,tipo):
     error_temporal=[]
     if token!='\t':
         error_temporal.append(str(row))
         error_temporal.append(str(colum))
         error_temporal.append(token)
+        error_temporal.append(tipo)
         errores.append(error_temporal)
 
 class multifunctions:
@@ -65,7 +66,7 @@ class multifunctions:
                         estado=1
 
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
 
                 elif estado == 1:
                     if ord(caracter) >= 65 and ord(caracter) <=122:#es letra
@@ -75,13 +76,13 @@ class multifunctions:
                         estado=7
                         lexema = lexema +caracter
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
                 elif estado==7:
                     if  ord(caracter) >= 65 and ord(caracter) <=122:#es letra
                         estado = 2
                         lexema = lexema + caracter
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
 
                 elif estado == 2:
                     if ord(caracter) >= 65 and ord(caracter) <=122 :#es letra
@@ -92,7 +93,7 @@ class multifunctions:
                         estado = 3
                         lexema = lexema + caracter + "\n"
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
 
                 elif estado == 3:
                     if (ord(caracter) >= 65 and ord(caracter) <=122):#es letra
@@ -120,7 +121,7 @@ class multifunctions:
                         estado = 1
                         lexema = lexema + "\n"
                     else:   
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
                 elif estado == 4:
                     if (ord(caracter) >= 65 and ord(caracter) <=122):#es letra 
                         estado=4
@@ -135,14 +136,14 @@ class multifunctions:
                         estado = 1
                         lexema = lexema + "\n"
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
 
                 elif estado == 5:
                     if (ord(caracter) >= 65 and ord(caracter) <=122) or (ord(caracter) >= 48 and ord(caracter) <=57):#es letra o numero
                         estado=6
                         lexema = lexema +caracter
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
                 elif estado == 6:
                     if (ord(caracter) >= 65 and ord(caracter) <=122) or (ord(caracter) >= 48 and ord(caracter) <=57):#es letra o numero
                         estado=6
@@ -151,7 +152,7 @@ class multifunctions:
                         estado = 1
                         lexema = lexema + "\n"
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
 
                 elif estado == 8:
                     if (ord(caracter) >= 65 and ord(caracter) <=122):#es letra 
@@ -170,7 +171,7 @@ class multifunctions:
                         estado = 1
                         lexema = lexema + "\n"
                     else:
-                        save_mistakes(row,colum,caracter)
+                        save_mistakes(row,colum,caracter,"Desconocido")
                 elif estado == 9:
                     if (ord(caracter) >= 48 and ord(caracter) <=57):#es numero
                         estado = 10
@@ -196,13 +197,13 @@ class multifunctions:
         patruteclose = r"\s*/r*R*u*U*t*T*a*A*>"
         patestationopen = r"\s*e*E*s*S*t*T*a*A*c*C*i*I*o*O*n*N*>"
         patestationclose = r"\s*/e*E*s*S*t*T*a*A*c*C*i*I*o*O*n*N*>"
-        patname = r"\s*/nombre>"
-        patnameclose = r"\s*/nombre>"
-        patstartclose = r"\s*/inicio>"
-        patendclose = r"\s*/fin>"
-        patweight = r"\s*/peso>"
-        patestatusclose = r"\s*/estado>"
-        patcolorclose = r"\s*/color>"
+        patname = r"\s*/n*N*O*o*m*M*B*b*r*R*e*E*>"
+        patnameclose = r"\s*/n*N*O*o*m*M*B*b*r*R*e*E*>"
+        patstartclose = r"\s*/i*I*n*N*i*I*c*C*i*I*o*O*>"
+        patendclose = r"\s*/F*f*I*i*N*n*>"
+        patweight = r"\s*/P*p*E*e*S*s*O*o*>"
+        patestatusclose = r"\s*/e*E*s*S*t*T*a*A*d*D*o*O*>"
+        patcolorclose = r"\s*/c*C*o*O*l*L*o*O*r*R*>"
         
         file = open("gege.txt","r")
         lines = file.readlines()
@@ -220,8 +221,9 @@ class multifunctions:
                 estacion = Estation()
                 padre = "estacion"
 
-            if (re.match(patnameclose,row)) and padre != "ruta" and padre!="estacion":
-                lexema_temporal.append(ruta.nombre)
+            if (re.match(patnameclose,row)) and padre != "ruta" and padre != "estacion":
+                mapa.nombre = str(pila.pop())
+                lexema_temporal.append(mapa.nombre)
                 lexema_temporal.append("nombre")
 
             if (re.match(patnameclose,row)) and padre == "ruta":
@@ -251,8 +253,21 @@ class multifunctions:
                 edge = []
                 while(pila.get_Size()!=0):
                     pila.pop()
+#-------------------------------------DETECTOR DE ERRORES---------------------------------------------------------
+            if (re.match(patweight,row))and padre == "estacion":
+                save_mistakes("#","#",str(pila.pop()),"El atributo peso no pertenece a estación")
 
+            if (re.match(patstartclose,row))and padre == "estacion":
+                save_mistakes("#","#",str(pila.pop()),"El atributo inicio no pertenece a estación")
 
+            if (re.match(patendclose,row))and padre == "estacion":
+                save_mistakes("#","#",str(pila.pop()),"El atributo fin no pertenece a estación")
+
+            if (re.match(patestatusclose,row)) and padre == "ruta":
+                save_mistakes("#","#",str(pila.pop()),"El atributo estado no pertenece a ruta")
+            if (re.match(patcolorclose,row))and padre == "ruta":
+                save_mistakes("#","#",str(pila.pop()),"El atributo color no pertenece a ruta")
+#------------------------------------------------------------------------------------------------------------------
             if (re.match(patnameclose,row)) and padre == "estacion":
                 estacion.nombre = str(pila.pop()).strip() 
                 lexema_temporal.append(estacion.nombre)
@@ -319,11 +334,17 @@ class login:
         ruta_inicio = ""
         ruta_fin= ""
         rutas_cortas = []
+        corto = []
+        Map_name=""
         if option == 1:
             limpiador()
             print("Ingrese la ruta del archivo")
-            path = str(input())
-            lector.analyzer(path)     
+            try:
+                path = str(input())
+                lector.analyzer(path)    
+            except:
+                print("Ingrese una ruta válida")
+                inicio.take_name()
             
         elif option == 2:
             if len(probando)==0 or len(estaciones)==0:
@@ -334,18 +355,25 @@ class login:
                 ruta_inicio = str(input())
                 print("Ingrese su estacion final")
                 ruta_fin = str(input())
-                rutas_cortas = short_rute(probando,estaciones,ruta_inicio,ruta_fin)
+                try:
+                    rutas_cortas = short_rute(probando,estaciones,ruta_inicio,ruta_fin)
+                    graficar_camino(probando,estaciones,rutas_cortas)
+                    print("Graficando camino mas corto...")
+                    inicio.take_name()
+                except:
+                    print("Ingrese una entrada válida")
+                    inicio.take_name()
 
         elif option == 3:
             if len(probando)==0 or len(estaciones)==0:
                 print("----Debe ingresar primero un archivo válido----")
                 inicio.take_name()
             else:
-                print("Graficando Mapa...")
                 ruta_fin = dame_ultimo((len(estaciones)-1)-1)
                 short_rute(probando,estaciones,estaciones[0].nombre,ruta_fin)
-                graficos(probando,estaciones)
-
+                graficos(probando,estaciones,mapa.nombre)
+                print("Graficando Mapa...")
+                inicio.take_name()
             
         elif option == 4:
             print("Gracias por utilizar MapTracing :)")

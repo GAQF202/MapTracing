@@ -31,3 +31,8 @@ class Estation(object): #VERTICES
         return self.nombre, self.estado, self.color, self.posicion
 
 
+class Map(object):
+    def __init__(self):
+        self.nombre = ""
+    def get(self):
+        return self.nombre
