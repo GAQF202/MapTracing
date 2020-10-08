@@ -1,22 +1,24 @@
 digraph finite_state_machine {
 	rankdir=LR size="8,5"
 	node [color="#dae8fc" shape=ellipse style=filled]
-	"agua
-disponible"
-	node [color="#f5f5f5" shape=ellipse style=filled]
-	"fuego
-disponible"
+	estnorte [label="estnorte
+disponible"]
 	node [color="#dae8fc" shape=ellipse style=filled]
-	"hierba
-disponible"
+	est_este [label="est_este
+disponible"]
+	node [color="#f5f5f5" shape=ellipse style=filled]
+	estoeste [label="estoeste
+disponible"]
+	node [color="#d5e8d4" shape=ellipse style=filled]
+	sur [label="sur
+disponible"]
 	edge [color="#FF6347" penwidth=3]
-	"fuego
-disponible" -> "hierba
-disponible" [label="rutaX1
-1.0"]
+	est_este -> estoeste [label="ruta_central1
+2.5"]
 	edge [color="#FF6347" penwidth=3]
-	"agua
-disponible" -> "fuego
-disponible" [label="rutaY2
-2"]
+	estnorte -> est_este [label="RUTA_NE
+5.00001"]
+	edge [color="#FF6347" penwidth=3]
+	estoeste -> sur [label="ruta_OS
+2.4"]
 }

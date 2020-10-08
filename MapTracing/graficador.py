@@ -11,7 +11,7 @@ colores = ["#C0C0C0", "#808080", "#000000", "#FFFFFF"]
 def short_rute(rutas,estaciones,inicio,fin):
     rutas_seleccionadas = []
     aristas = []
-
+    
     for estacion in estaciones:
         for ruta in rutas:
             
@@ -38,7 +38,7 @@ def short_rute(rutas,estaciones,inicio,fin):
 
 #------------------------------METODO PARA GRAFICAR MAPAS Y RUTAS------------------------------
 def graficos(rutas, estaciones,map_name):
-    f = Digraph('finite_state_machine', filename='fsm.gv')
+    f = Digraph('finite_state_machine', filename='Mapa.gv')
     f.attr(rankdir='LR', size='8,5')
     f.attr(label= r"\n\n"+ map_name)
     #f.attr(fontsize='20', color="#19EDBD")
@@ -46,19 +46,17 @@ def graficos(rutas, estaciones,map_name):
 #--------------------------------CREA RUTAS COMO ARISTAS----------------------------------------
     for estacion in estaciones:
         f.attr('node', shape='ellipse',style='filled', color = str(estacion.color))
-        f.node(estacion.nombre.lower() + "\n" + estacion.estado.lower())
+        f.node(estacion.nombre.lower(),label=str(estacion.nombre.lower()+"\n"+estacion.estado.lower()))
 #-------------------------------CREA ESTACIONES COMO NODOS--------------------------------------
-    
+
     for ruta in rutas:
         if ruta.get_marca()=="si":
             f.attr('edge',color="#FF6347",penwidth = "3")
-            f.edge(str(ruta.inicio).lower()+ "\n" + estacion.estado.lower(), str(ruta.fin).lower()+ "\n" + estacion.estado.lower(), label=str(ruta.nombre)+"\n"+str(ruta.peso))
+            f.edge(str(ruta.inicio).lower(), str(ruta.fin).lower(), label=str(ruta.nombre)+"\n"+str(ruta.peso))
         else:
             f.attr('edge',color="black",penwidth = "")
-            f.edge(str(ruta.inicio).lower()+ "\n" + estacion.estado.lower(), str(ruta.fin).lower()+ "\n" + estacion.estado.lower(), label=str(ruta.nombre)+"\n"+str(ruta.peso))
-    
-    for ruta in rutas:
-        ruta.marca = ""
+            f.edge(str(ruta.inicio).lower(), str(ruta.fin).lower(), label=str(ruta.nombre)+"\n"+str(ruta.peso))
+
 
     f.view()
 
@@ -73,12 +71,12 @@ def graficar_camino(rutas,estaciones,nodos):
 
     for bolita in bolitas:
         g.attr('node', shape='ellipse',style='filled', color = str(bolita.color))
-        g.node(bolita.nombre.lower()+ "\n" + bolita.estado.lower() )
+        g.node(bolita.nombre.lower(), label=str(bolita.nombre.lower()+"\n"+bolita.estado.lower()) )
 
     for ruta in rutas:
         if ruta.get_marca()=="si":
             g.attr('edge',color="#FF6347",penwidth = "3")
-            g.edge(str(ruta.inicio).lower()+ "\n" + bolita.estado.lower(), str(ruta.fin).lower()+ "\n" + bolita.estado.lower(), label=str(ruta.nombre)+"\n"+str(ruta.peso))
+            g.edge(str(ruta.inicio).lower(), str(ruta.fin).lower(), label=str(ruta.nombre)+"\n"+str(ruta.peso))
 
     for ruta in rutas:
         ruta.marca = ""

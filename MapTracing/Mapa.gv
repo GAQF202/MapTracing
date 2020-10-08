@@ -1,0 +1,45 @@
+digraph finite_state_machine {
+	rankdir=LR size="8,5"
+	label="\n\nMapaCentral
+"
+	fontsize=20
+	node [color="#1A5AAF" shape=ellipse style=filled]
+	estacionzona6 [label="estacionzona6
+disponible"]
+	node [color="#AF5B1A" shape=ellipse style=filled]
+	estacionzona2 [label="estacionzona2
+disponible"]
+	node [color="#E52E22" shape=ellipse style=filled]
+	estacionzona1 [label="estacionzona1
+disponible"]
+	node [color="#208E40" shape=ellipse style=filled]
+	estacionzona5 [label="estacionzona5
+disponible"]
+	node [color="#AF5B1A" shape=ellipse style=filled]
+	estacionzona4 [label="estacionzona4
+cerrada"]
+	edge [color=black penwidth=""]
+	estacionzona1 -> estacionzona6 [label="ruta_central
+2.5"]
+	edge [color="#FF6347" penwidth=3]
+	estacionzona6 -> estacionzona2 [label="ruta_central2
+4"]
+	edge [color=black penwidth=""]
+	estacionzona6 -> estacionzona1 [label="ruta2
+5"]
+	edge [color="#FF6347" penwidth=3]
+	estacionzona2 -> estacionzona1 [label="rutaExpress
+0.7"]
+	edge [color="#FF6347" penwidth=3]
+	estacionzona1 -> estacionzona5 [label="rutaJardines
+2"]
+	edge [color=black penwidth=""]
+	estacionzona6 -> estacionzona4 [label="ruta4
+1.2"]
+	edge [color=black penwidth=""]
+	estacionzona4 -> estacionzona5 [label="ruta_4_5
+2"]
+	edge [color=black penwidth=""]
+	estacionzona2 -> estacionzona5 [label="ruta_2_5
+3"]
+}

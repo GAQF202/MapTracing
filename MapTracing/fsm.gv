@@ -1,48 +1,39 @@
 digraph finite_state_machine {
 	rankdir=LR size="8,5"
-	label="\n\nCiudad_Guatemala
+	label="\n\nTR1F0RC3
 "
 	fontsize=20
-	node [color="#dae8fc" shape=ellipse style=filled]
-	"estnorte
-disponible"
 	node [color="#f5f5f5" shape=ellipse style=filled]
-	"estoeste
-disponible"
+	fuego [label="fuego
+disponible"]
 	node [color="#dae8fc" shape=ellipse style=filled]
-	"est_este
-disponible"
-	node [color="#d5e8d4" shape=ellipse style=filled]
-	"sur
-disponible"
-	edge [color=black penwidth=""]
-	"est_este
-disponible" -> "estoeste
-disponible" [label="ruta_central1
-2.5"]
-	edge [color=black penwidth=""]
-	"estoeste
-disponible" -> "est_este
-disponible" [label="ruta_central2
-1.5"]
-	edge [color=black penwidth=""]
-	"estnorte
-disponible" -> "estoeste
-disponible" [label="rutaNO
-8"]
+	agua [label="agua
+disponible"]
+	node [color="#dae8fc" shape=ellipse style=filled]
+	hierba [label="hierba
+disponible"]
+	node [color="#dae8fc" shape=ellipse style=filled]
+	estacion_x2 [label="estacion_x2
+cerrada"]
+	node [color="#dae8fc" shape=ellipse style=filled]
+	estacion_x [label="estacion_x
+disponible"]
 	edge [color="#FF6347" penwidth=3]
-	"estnorte
-disponible" -> "est_este
-disponible" [label="RUTA_NE
-5.00001"]
+	fuego -> hierba [label="rutaX1
+1.0"]
 	edge [color=black penwidth=""]
-	"estoeste
-disponible" -> "sur
-disponible" [label="ruta_OS
-2.4"]
+	hierba -> fuego [label="rutaX2
+6"]
 	edge [color=black penwidth=""]
-	"est_este
-disponible" -> "sur
-disponible" [label="ruta_ES
-5"]
+	hierba -> agua [label="rutaZ2
+6.21"]
+	edge [color=black penwidth=""]
+	agua -> hierba [label="rutaZ1
+8"]
+	edge [color=black penwidth=""]
+	agua -> fuego [label="rutaY2
+2"]
+	edge [color=black penwidth=""]
+	fuego -> agua [label="rutaY1
+8"]
 }

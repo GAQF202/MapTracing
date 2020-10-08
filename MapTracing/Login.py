@@ -323,7 +323,7 @@ class login:
 
     not_file = False
     def take_name(self):
-
+        #inicio.datos()
         print("1. Cargar Archivo")
         print("2. Graficar Ruta")
         print("3. Graficar Mapa ")
@@ -356,12 +356,14 @@ class login:
                 print("Ingrese su estacion final")
                 ruta_fin = str(input())
                 try:
-                    rutas_cortas = short_rute(probando,estaciones,ruta_inicio,ruta_fin)
-                    graficar_camino(probando,estaciones,rutas_cortas)
                     print("Graficando camino mas corto...")
+                    rutas_cortas = short_rute(probando,estaciones,ruta_inicio,ruta_fin)
+                    graficar_camino(probando,estaciones,rutas_cortas)                  
+                    os.system("cls")
                     inicio.take_name()
                 except:
                     print("Ingrese una entrada válida")
+                    os.system("cls")
                     inicio.take_name()
 
         elif option == 3:
@@ -369,10 +371,11 @@ class login:
                 print("----Debe ingresar primero un archivo válido----")
                 inicio.take_name()
             else:
+                print("Graficando Mapa...")
                 ruta_fin = dame_ultimo((len(estaciones)-1)-1)
                 short_rute(probando,estaciones,estaciones[0].nombre,ruta_fin)
                 graficos(probando,estaciones,mapa.nombre)
-                print("Graficando Mapa...")
+                os.system("cls")
                 inicio.take_name()
             
         elif option == 4:
@@ -381,6 +384,13 @@ class login:
             print("")
             print("Por favor Eliga una opción válida")
             inicio.take_name()
+
+    def datos(self):
+        print("***********************************************")
+        print("Lenguajes formales y de programación sección:A-")
+        print("*    Gerson Aaron Quinia Folgar 201904157     *")
+        print("***********************************************")
+        print("**************Eliga una opción*****************")
 
     def regresar(self):
         print("Para regresar presione cualquier tecla")
